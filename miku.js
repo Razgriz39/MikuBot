@@ -5,13 +5,13 @@ console.log(cmd);
 timeDifference.push(Date.now());
 exports.timeDifference = timeDifference;
 
-const Discord = require('discord.js');
-const Enmap = require('enmap');
-const fs = require('fs');
+const Discord = require("discord.js");
+const Enmap = require("enmap");
+const fs = require("fs");
 
 const bot = new Discord.Client();
-const token = require('./bruh.json');
-bot.config = require('./config.js');
+const token = require("./bruh.json");
+bot.config = require("./config.js");
 
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
@@ -35,5 +35,6 @@ fs.readdir("./commands/", (err, files) => {
     });
 });
 
-bot.login(token.miku);
 
+
+bot.login(token.miku);
