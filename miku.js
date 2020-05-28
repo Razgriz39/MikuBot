@@ -6,7 +6,6 @@ timeDifference.push(Date.now());
 exports.timeDifference = timeDifference;
 
 const Discord = require("discord.js");
-const Enmap = require("enmap");
 const fs = require("fs");
 
 const bot = new Discord.Client();
@@ -22,7 +21,8 @@ fs.readdir("./events/", (err, files) => {
     });
 });
 
-bot.commands = new Enmap();
+bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
     if (err) return console.error(err);
