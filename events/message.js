@@ -1,19 +1,24 @@
+const mikuReply = require('../misc/replies.js')
 module.exports = (bot, message) => {
     //Ignores other bot
     if (message.author.bot) return;
 
     //Argument/command name definition.
     botPing = "<@!" + bot.user.id + ">"; //Makes bot ping variable
+    miku = 'miku';
     if(message.content.startsWith(bot.config.prefix)) { //If message starts with prefix.
         args = message.content.slice(bot.config.prefix.length).trim().split(/ +/g);
         command = args.shift().toLowerCase();
     } else if(message.content.startsWith(botPing)) { //If message starts with a ping.
         args = message.content.slice(botPing.length + 1).trim().split(/ +/g);
         command = args.shift().toLowerCase();
-    } else if(message.author.id === bot.config.ownerID) { //If i'm the one sending a message.
+    } else if((!message.content.startsWith(miku)) && (message.author.id === bot.config.ownerID)) { //If i'm sending a message that does not start with 'miku'.
         args = message.content.toLowerCase().trim().split(/ +/g);
         mikuReply.send(args, message); //Stupid stuff you don't need to know.
         return;
+    } else if(message.content.startsWith(miku)) { //If the message starts with miku.
+        args = message.content.slice(miku.length + 1).trim().split(/ +/g);
+        command = args.shift().toLowerCase();
     } else {
         return;
     }
