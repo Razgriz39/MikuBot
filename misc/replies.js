@@ -1,5 +1,4 @@
 timeDifference = require('../miku.js');
-const Discord = require('discord.js');
 module.exports = {
     send(args, message) {
         if(((args.includes('hello'))||(args.includes('hey'))||(args.includes('hi'))) &&
@@ -12,7 +11,7 @@ module.exports = {
         }
         if(((args.includes('thank'))||(args.includes('thanks'))) &&
             (args.includes('miku'))){
-            message.channel.send('Ehehe~');
+            message.channel.send('Ehehe ヽ(*⌒▽⌒*)ﾉ');
         }
         if((args.includes('kiss')) && (args.includes('miku'))){
             message.channel.send(`(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄`);
