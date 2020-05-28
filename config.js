@@ -1,16 +1,6 @@
 const config = {
     'ownerID': '190308487316766720',
-
-    'defaultSettings': {
-        'prefix': '+',
-        'modLogChannel': 'mod-log',
-        'modRole': 'Moderator',
-        'adminrole': 'Admin',
-        'sysNotice': 'true',
-        'welcomeChannel': 'Welcome',
-        "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
-        "welcomeEnabled": "false"
-    },
+    'prefix': '+',
 
     permLevels: [
         { level: 0,
