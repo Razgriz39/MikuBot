@@ -1,26 +1,23 @@
-const chalk = require("chalk");
-const moment = require("moment");
-
 exports.log = (content, type = "log") => {
-    const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
+    const timestamp = `[${Date().toString().substring(0, Date().toString().length-22)} JST]:`;
     switch (type) {
         case "log": {
-            return console.log(`${timestamp} ${chalk.bgBlue(type.toUpperCase())} ${content} `);
+            return console.log(`${timestamp} ${content} `);
         }
         case "warn": {
-            return console.log(`${timestamp} ${chalk.black.bgYellow(type.toUpperCase())} ${content} `);
+            return console.log(`${timestamp} ${content} `);
         }
         case "error": {
-            return console.log(`${timestamp} ${chalk.bgRed(type.toUpperCase())} ${content} `);
+            return console.log(`${timestamp} ${content} `);
         }
         case "debug": {
-            return console.log(`${timestamp} ${chalk.green(type.toUpperCase())} ${content} `);
+            return console.log(`${timestamp} ${content} `);
         }
         case "cmd": {
-            return console.log(`${timestamp} ${chalk.black.bgWhite(type.toUpperCase())} ${content}`);
+            return console.log(`${timestamp} ${content}`);
         }
         case "ready": {
-            return console.log(`${timestamp} ${chalk.black.bgGreen(type.toUpperCase())} ${content}`);
+            return console.log(`${timestamp} ${content}`);
         }
         default: console.error("Logger type must be either warn, debug, log, ready, cmd or error.");
     }
