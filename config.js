@@ -1,6 +1,16 @@
 const config = {
     'ownerID': '190308487316766720',
-    'prefix': '+',
+
+    defaultSettings: {
+        "prefix": "+",
+        "modLogChannel": "mod-log",
+        "moderatorRole": "Moderator",
+        "adminRole": "Administrator",
+        "systemNotice": "true",
+        "welcomeChannel": "welcome",
+        "welcomeMessage": "Welcome to {{guild}} {{user}}, enjoy your stay!",
+        "welcomeEnabled": "false"
+    },
 
     permLevels: [
         { level: 0,
@@ -8,7 +18,7 @@ const config = {
             check: () => true
         },
 
-        { level: 2,
+        { level: 1,
             name: "Moderator",
             check: (message) => {
                 try {
@@ -20,7 +30,7 @@ const config = {
             }
         },
 
-        { level: 3,
+        { level: 2,
             name: "Administrator",
             check: (message) => {
                 try {
@@ -32,12 +42,12 @@ const config = {
             }
         },
 
-        { level: 4,
+        { level: 3,
             name: "Server Owner",
             check: (message) => message.channel.type === "text" ? (message.guild.ownerID === message.author.id ? true : false) : false
         },
 
-        { level: 5,
+        { level: 4,
             name: "Bot Owner",
             check: (message) => message.bot.config.ownerID === message.author.id
         }

@@ -11,6 +11,8 @@ const fs = require("fs");
 const bot = new Discord.Client();
 const token = require("./bruh.json");
 bot.config = require("./config.js");
+bot.mongoose = require("./misc/database.js")
+require('./misc/botFunctions.js')(bot);
 
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
@@ -35,6 +37,5 @@ fs.readdir("./commands/", (err, files) => {
     });
 });
 
-
-
+bot.mongoose.init();
 bot.login(token.miku);
