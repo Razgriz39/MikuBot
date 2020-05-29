@@ -1,13 +1,15 @@
 const mikuReply = require('../misc/replies.js')
-module.exports = (bot, message) => {
+module.exports = async (bot, message) => {
+
     //Ignores other bot
     if (message.author.bot) return;
-
+    let settings;
+    settings = await bot.getGuild(message.guild);
     //Argument/command name definition.
     botPing = "<@!" + bot.user.id + ">"; //Makes bot ping variable
     miku = 'miku';
-    if(message.content.startsWith(bot.config.prefix)) { //If message starts with prefix.
-        args = message.content.slice(bot.config.prefix.length).trim().split(/ +/g);
+    if(message.content.startsWith(bot.settings.prefix)) { //If message starts with prefix.
+        args = message.content.slice(bot.settings.prefix.length).trim().split(/ +/g);
         command = args.shift().toLowerCase();
     } else if(message.content.startsWith(botPing)) { //If message starts with a ping.
         args = message.content.slice(botPing.length + 1).trim().split(/ +/g);
@@ -30,5 +32,5 @@ module.exports = (bot, message) => {
     if (!cmd) return;
 
     // Run the command
-    cmd.run(bot, message, args);
+    cmd.run(bot, message, args, settings);
 };
