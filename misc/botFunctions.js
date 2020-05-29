@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const Guild = require('../model/guild.js')
+
 module.exports = bot => {
 
     /*
@@ -6,7 +9,7 @@ module.exports = bot => {
 
     bot.permlevel = message => {
         let permLevel = 0;
-        const permOrder = client.config.permLevels.slice(0).sort((low, high) => low.level < high.level ? 1 : -1);
+        const permOrder = bot.config.permLevels.slice(0).sort((low, high) => low.level < high.level ? 1 : -1);
 
         while(permOrder.length){
             const currentLevel = permOrder.shift();
@@ -24,26 +27,46 @@ module.exports = bot => {
      */
 
     const defaultSettings = {
-            "prefix": "+",
-            "modLogChannel": "mod-log",
-            "moderatorRole": "Moderator",
-            "adminRole": "Administrator",
-            "systemNotice": "true",
-            "welcomeChannel": "welcome",
-            "welcomeMessage": "Welcome {{user}}, enjoy your stay!",
-            "welcomeEnabled": "false"
+        "prefix": "+",
+        "modLogChannel": "mod-log",
+        "moderatorRole": "Moderator",
+        "adminRole": "Administrator",
+        "systemNotice": "true",
+        "welcomeChannel": "welcome",
+        "welcomeMessage": "Welcome to {{guild}} {{user}}, enjoy your stay!",
+        "welcomeEnabled": "false"
     };
 
     /*
     GUILD SETTINGS
      */
 
-    bot.getSettings = guild => {
-        bot.settings.ensure('default', defaultSettings);
-        if(!guild) return bot.settings.get('default');
-        const guildConf = client.settings.get(guild.id) || {};
-        return ({...client.settings.get("default"), ...guildConf});
+    bot.getGuild = async (guild) => {
+        let data = await Guild.findOne({ guildID: guild.id });
+        if (data) return data;
+        else return bot.config.defaultSettings;
+    };
 
+    bot.updateGuild = async (guild, settings) => {
+        let data = await bot.getGuild(guild);
+
+        if (typeof data !== 'object') data = {};
+        for (const key in settings) {
+            if (data[key] !== settings[key]) data[key] = settings[key];
+            else return;
+        }
+
+        console.log(`Guild "${data.guildName}" updated settings: ${Object.keys(settings)}`);
+        return await data.updateOne(settings);
+    };
+
+    bot.createGuild = async (settings) => {
+        let defaults = Object.assign({ _id: mongoose.Types.ObjectId() }, bot.config.defaultSettings);
+        let merged = Object.assign(defaults, settings);
+
+        const newGuild = await new Guild(merged);
+        return newGuild.save()
+            .then(console.log(`Default settings saved for guild "${merged.guildName}" (${merged.guildID})`));
     };
 
     /*
@@ -105,8 +128,17 @@ module.exports = bot => {
         return false;
     };
 
+    bot.clean = text => {
+        if (typeof(text) === "string") {
+            return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+        } else {
+            return text;
+        }
+    },
+
+
     process.on("unhandledRejection", err => {
-        bot.logger.error(`Unhandled rejection: ${err}`);
+        console.error(`Unhandled rejection: ${err}`);
         console.error(err);
     });
 }
