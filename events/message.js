@@ -5,8 +5,7 @@ module.exports = async (bot, message) => {
     if (message.author.bot) return;
 
     //Get server specific settings from the database.
-    let settings;
-    bot.settings = await bot.getGuild(message.guild);
+    let settings = bot.settings = await bot.getGuild(message.guild);
 
     //Argument/command name definition.
     botPing = `<@!${bot.user.id}>`; //Makes bot ping variable.

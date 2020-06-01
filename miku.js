@@ -12,6 +12,8 @@ const bot = new Discord.Client();
 const token = require("./bruh.json");
 bot.config = require("./config.js");
 bot.mongoose = require("./misc/database.js")
+bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
 require('./misc/botFunctions.js')(bot);
 
 fs.readdir("./events/", (err, files) => {
@@ -22,9 +24,6 @@ fs.readdir("./events/", (err, files) => {
         bot.on(eventName, event.bind(null, bot));
     });
 });
-
-bot.commands = new Discord.Collection();
-bot.aliases = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
     if (err) return console.error(err);
