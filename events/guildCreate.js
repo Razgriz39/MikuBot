@@ -1,4 +1,3 @@
-const sendEmbed = require('../misc/embeds.js');
 const mongoose = require ('mongoose');
 module.exports = async (bot, guild) => {
     cmd = "";
@@ -10,7 +9,7 @@ module.exports = async (bot, guild) => {
     cmd = cmd.concat("=============================================\n")
     console.log(cmd);
     channelLog = bot.guilds.cache.get("683182971850981485").channels.cache.get("712965630130782236");
-    sendEmbed.send(channelLog, "Runtime log", cmd)
+    bot.sendEmbed.send(channelLog, "Runtime log", cmd)
 
     try{
         const newGuild = {
