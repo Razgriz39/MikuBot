@@ -1,4 +1,6 @@
 const sendEmbed = require('../misc/embeds.js');
+const mongoose = require ('mongoose');
+const Guild = require('../model/guild.js');
 module.exports = async (bot, guild) => {
     cmd = "";
     cmd = cmd.concat("=============================================\n")
@@ -10,4 +12,6 @@ module.exports = async (bot, guild) => {
     console.log(cmd);
     channelLog = bot.guilds.cache.get("683182971850981485").channels.cache.get("712965630130782236");
     sendEmbed.send(channelLog, "Runtime log", cmd)
+
+    await Guild.findOneAndDelete({guildID: guild.id});
 }
