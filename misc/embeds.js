@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-module.exports =  {
+module.exports = {
     send(channel, title, description) {
             embed = new Discord.MessageEmbed;
             embed.setTitle(title);
@@ -8,4 +8,4 @@ module.exports =  {
             embed.setFooter(Date().toString().substring(0, Date().toString().length-22))
             channel.send(embed=embed)
         }
-    };
+};

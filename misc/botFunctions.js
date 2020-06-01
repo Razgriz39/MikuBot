@@ -34,7 +34,7 @@ module.exports = bot => {
         "systemNotice": "true",
         "welcomeChannel": "welcome",
         "welcomeMessage": "Welcome to {{guild}} {{user}}, enjoy your stay!",
-        "welcomeEnabled": "false"
+        "welcomeEnabled": "disabled"
     };
 
     /*

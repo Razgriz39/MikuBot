@@ -9,7 +9,7 @@ const config = {
         "systemNotice": "true",
         "welcomeChannel": "welcome",
         "welcomeMessage": "Welcome to {{guild}} {{user}}, enjoy your stay!",
-        "welcomeEnabled": "false"
+        "welcomeEnabled": "disabled"
     },
 
     permLevels: [
