@@ -1,6 +1,6 @@
 exports.run = async (bot, message, args) => {
 
-    if (message.author.id !== bot.config.ownerID) return;
+    if (message.author.id !== bot.config.ownerID) return message.reply('You do not have permission to do this');
 
     try {
       const code = args.join(" ");
