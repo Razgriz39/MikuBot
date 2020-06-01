@@ -12,6 +12,7 @@ const bot = new Discord.Client();
 const token = require("./bruh.json");
 bot.config = require("./config.js");
 bot.mongoose = require("./misc/database.js")
+bot.sendEmbed = require('./misc/embeds.js');
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 require('./misc/botFunctions.js')(bot);
